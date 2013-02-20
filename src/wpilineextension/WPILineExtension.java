@@ -166,10 +166,8 @@ public class WPILineExtension extends WPICameraExtension {
 
         Robot.getTable().putNumber("targetX", bestX);
         Robot.getTable().putNumber("targetY", bestY);
-        double imageMidX = ((rawImage.getWidth())/2);
-        double imageMidY = ((rawImage.getHeight())/2);
-        Robot.getTable().putNumber("imageX", imageMidX);
-        Robot.getTable().putNumber("imageY", imageMidY);
+        
+        
         // Draw a crosshair
         // rawImage.drawLine(linePt1, linePt2, targetColor, 2);
 
