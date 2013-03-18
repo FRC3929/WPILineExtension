@@ -66,6 +66,8 @@ public class WPILineExtension extends WPICameraExtension {
     private IplImage val;
     private WPIPoint linePt1;
     private WPIPoint linePt2;
+    private int centerX;
+    private int centerY;
 
     public WPILineExtension() {
         morphKernel = IplConvKernel.create(3, 3, 1, 1, opencv_imgproc.CV_SHAPE_RECT, null);
@@ -161,19 +163,27 @@ public class WPILineExtension extends WPICameraExtension {
         }
 
         if (bestX > 0) {
-            rawImage.drawPoint(new WPIPoint((int)bestX, (int)bestY), targetColor, 5);
+//            centerX = (rawImage.getWidth()/2);
+//            centerY = (rawImage.getHeight()/2);
+//            rawImage.drawLine(new WPIPoint(((int)centerX-100),(int)centerY), new WPIPoint(((int)centerX+100),(int)centerY), WPIColor.GREEN, 4);
+//            rawImage.drawLine(new WPIPoint((int)centerX,((int)centerY-100)), new WPIPoint((int)centerX,((int)centerY+100)), WPIColor.GREEN, 4);
+            rawImage.drawPoint(new WPIPoint((int) bestX, (int) bestY), targetColor, 5);
         }
 
         Robot.getTable().putNumber("targetX", bestX);
         Robot.getTable().putNumber("targetY", bestY);
-        
-        
+
+
         // Draw a crosshair
         // rawImage.drawLine(linePt1, linePt2, targetColor, 2);
 
         DaisyExtensions.releaseMemory();
 
         //System.gc();
+        centerX = (rawImage.getWidth() / 2);
+        centerY = (rawImage.getHeight() / 2);
+        rawImage.drawLine(new WPIPoint(((int) centerX - 100), (int) centerY), new WPIPoint(((int) centerX + 100), (int) centerY), WPIColor.GREEN, 4);
+        rawImage.drawLine(new WPIPoint((int) centerX, ((int) centerY - 100)), new WPIPoint((int) centerX, ((int) centerY + 100)), WPIColor.GREEN, 4);
 
         return rawImage;
 
